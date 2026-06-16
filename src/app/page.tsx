@@ -164,35 +164,35 @@ export default function Page() {
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto flex min-h-screen max-w-[1640px]">
         <Sidebar />
-        <main className="flex-1 p-6 md:p-10">
+        <main className="flex-1 p-4 md:p-8">
           <Topbar />
 
           <section className="mt-8 grid gap-6 xl:grid-cols-[1.2fr_0.8fr]">
-            <div className="rounded-[2rem] border border-slate-800 bg-slate-950 p-8 shadow-xl shadow-cyan-500/10">
-              <div className="mb-6">
-                <p className="text-sm uppercase tracking-[0.3em] text-cyan-400">Entrada rápida</p>
-                <h2 className="mt-2 text-3xl font-semibold text-white">Captura operación</h2>
-                <p className="mt-3 text-slate-400">Rellena el reporte y envíalo directamente por WhatsApp.</p>
+            <div className="rounded-[2rem] border border-slate-800 bg-slate-950 p-5 md:p-8 shadow-xl shadow-cyan-500/10">
+              <div className="mb-4 md:mb-6">
+                <p className="text-xs uppercase tracking-[0.2em] text-cyan-400">Entrada rápida</p>
+                <h2 className="mt-1 text-2xl md:text-3xl font-semibold text-white">Captura operación</h2>
+                <p className="mt-2 text-xs md:text-sm text-slate-400">Rellena el reporte y envíalo por WhatsApp.</p>
               </div>
 
-              <form className="space-y-6" onSubmit={handleSubmit}>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <label className="space-y-2 text-sm text-slate-300">
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <label className="space-y-1 text-xs md:text-sm text-slate-300">
                     <span>✈️ Vuelo (Solo Salida)</span>
                     <input
                       value={operation.departureFlightNumber}
                       onChange={(event) => handleChange('departureFlightNumber', event.target.value)}
-                      className="w-full rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-500"
+                      className="w-full rounded-2xl border border-slate-800 bg-slate-900 px-3 py-2 text-slate-100 outline-none transition focus:border-cyan-500 text-sm"
                       placeholder="Ej. 2909 (Salida)"
                     />
                   </label>
-                  <label className="space-y-2 text-sm text-slate-300">
+                  <label className="space-y-1 text-xs md:text-sm text-slate-300">
                     <span>🛫 Gate (Solo Salida)</span>
                     <input
                       list="arrivalGateOptions"
                       value={operation.gate}
                       onChange={(event) => handleChange('gate', event.target.value)}
-                      className="w-full rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-500"
+                      className="w-full rounded-2xl border border-slate-800 bg-slate-900 px-3 py-2 text-slate-100 outline-none transition focus:border-cyan-500 text-sm"
                       placeholder="Ej. A12 (Salida)"
                     />
                   </label>
@@ -218,9 +218,9 @@ export default function Page() {
                   </label>
                 </div>
 
-                <div className="rounded-3xl border border-slate-800 bg-slate-900 p-5">
-                  <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">Llegada</p>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">Llegada</p>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       { field: 'flightNumber', label: '✈️ Vuelo llegada', isText: true },
                       { field: 'pax', label: '👥 PAX' },
@@ -234,27 +234,27 @@ export default function Page() {
                       { field: 'arrivalBlnd', label: 'BLND' },
                       { field: 'eta', label: '⏰ ETA', isText: true },
                     ].map((item) => (
-                      <label key={item.field} className="space-y-2 text-sm text-slate-300">
-                        <span>{item.label}</span>
+                      <label key={item.field} className="space-y-0.5 text-xs md:text-sm text-slate-300">
+                        <span className="text-xs">{item.label}</span>
                         <input
                           list={item.field === 'flightNumber' ? 'arrivalFlightOptions' : undefined}
                           value={operation[item.field as keyof FlightOperation] as string | number}
                           onChange={(event) => handleChange(item.field as keyof FlightOperation, event.target.value)}
-                          className="w-full rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-500"
+                          className="w-full rounded-2xl border border-slate-800 bg-slate-900 px-2 py-1.5 text-slate-100 outline-none transition focus:border-cyan-500 text-sm"
                           placeholder={item.isText ? 'HH:MM' : item.field === 'flightNumber' ? 'Ej. 2908' : '0'}
                           type={item.isText ? 'text' : 'number'}
                         />
                       </label>
                     ))}
                   </div>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-3">
-                    <label className="space-y-2 text-sm text-slate-300">
-                      <span>🛫 Gate (Llegada)</span>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                    <label className="space-y-0.5 text-xs md:text-sm text-slate-300">
+                      <span className="text-xs">🛫 Gate (Llegada)</span>
                       <input
                         list="arrivalGateOptions"
                         value={operation.arrivalGate}
                         onChange={(e) => handleChange('arrivalGate', e.target.value)}
-                        className="w-full rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-500"
+                        className="w-full rounded-2xl border border-slate-800 bg-slate-900 px-2 py-1.5 text-slate-100 outline-none transition focus:border-cyan-500 text-sm"
                         placeholder="Ej. A2"
                       />
                     </label>
@@ -312,9 +312,9 @@ export default function Page() {
                   <option value="29-34" />
                 </datalist>
 
-                <div className="rounded-3xl border border-slate-800 bg-slate-900 p-5">
-                  <p className="text-sm uppercase tracking-[0.3em] text-cyan-300">Salida</p>
-                  <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-cyan-300">Salida</p>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                     {[
                       { field: 'departureFlightNumber', label: '✈️ Vuelo salida', isText: true },
                       { field: 'departurePax', label: '👥 PAX' },
@@ -345,14 +345,14 @@ export default function Page() {
                   </div>
                 </div>
 
-                <label className="flex items-center gap-3 rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-sm text-slate-300">
+                <label className="flex items-center gap-2 rounded-2xl border border-slate-800 bg-slate-900 px-3 py-2 text-xs md:text-sm text-slate-300">
                   <input
                     type="checkbox"
                     checked={operation.nogo}
                     onChange={(event) => handleChange('nogo', event.target.checked)}
-                    className="h-4 w-4 rounded border-slate-700 bg-slate-800 text-cyan-500"
+                    className="h-3 w-3 rounded border-slate-700 bg-slate-800 text-cyan-500"
                   />
-                  Marcar como NOGO
+                  Marcar NOGO
                 </label>
 
                 {operation.nogo && (
@@ -378,21 +378,21 @@ export default function Page() {
                   </div>
                 )}
 
-                <label className="space-y-2 text-sm text-slate-300">
+                <label className="space-y-1 text-xs md:text-sm text-slate-300">
                   <span>WhatsApp número</span>
                   <input
                     value={phone}
                     onChange={(event) => setPhone(event.target.value)}
-                    className="w-full rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-500"
+                    className="w-full rounded-2xl border border-slate-800 bg-slate-900 px-3 py-2 text-slate-100 outline-none transition focus:border-cyan-500 text-sm"
                     placeholder="809 802 0006 o +18098020006"
                   />
                 </label>
-                <p className="text-xs text-slate-500">Formato aceptado: números, espacios o +. ETA es llegada, ETD es salida.</p>
+                <p className="text-xs text-slate-500">ETA = llegada, ETD = salida. ALGR/BLND separados por vuelo.</p>
 
                 <button
                   type="submit"
                   disabled={!isValid || sending}
-                  className="inline-flex w-full items-center justify-center rounded-3xl bg-cyan-500 px-6 py-4 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="inline-flex w-full items-center justify-center rounded-2xl bg-cyan-500 px-4 py-3 text-xs md:text-sm font-semibold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {sending ? 'Enviando...' : 'Enviar por WhatsApp'}
                 </button>
