@@ -241,43 +241,11 @@ export default function Page() {
                           value={operation[item.field as keyof FlightOperation] as string | number}
                           onChange={(event) => handleChange(item.field as keyof FlightOperation, event.target.value)}
                           className="w-full rounded-2xl border border-slate-800 bg-slate-900 px-2 py-1.5 text-slate-100 outline-none transition focus:border-cyan-500 text-sm"
-                          placeholder={item.isText ? 'HH:MM' : item.field === 'flightNumber' ? 'Ej. 2908' : '0'}
+                          placeholder={item.field === 'flightNumber' ? 'Ej. WS 2908' : item.isText ? 'HH:MM' : '0'}
                           type={item.isText ? 'text' : 'number'}
                         />
                       </label>
                     ))}
-                  </div>
-                  <div className="mt-3 grid gap-2 sm:grid-cols-3">
-                    <label className="space-y-0.5 text-xs md:text-sm text-slate-300">
-                      <span className="text-xs">🛫 Gate (Llegada)</span>
-                      <input
-                        list="arrivalGateOptions"
-                        value={operation.arrivalGate}
-                        onChange={(e) => handleChange('arrivalGate', e.target.value)}
-                        className="w-full rounded-2xl border border-slate-800 bg-slate-900 px-2 py-1.5 text-slate-100 outline-none transition focus:border-cyan-500 text-sm"
-                        placeholder="Ej. A2"
-                      />
-                    </label>
-                    <label className="space-y-2 text-sm text-slate-300">
-                      <span>🎫 Counters (Llegada)</span>
-                      <input
-                        list="arrivalCountersOptions"
-                        value={operation.arrivalCounters}
-                        onChange={(e) => handleChange('arrivalCounters', e.target.value)}
-                        className="w-full rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-500"
-                        placeholder="Ej. 1-6"
-                      />
-                    </label>
-                    <label className="space-y-2 text-sm text-slate-300">
-                      <span>🧾 Belt (Llegada)</span>
-                      <input
-                        list="arrivalBeltOptions"
-                        value={operation.arrivalBelt}
-                        onChange={(e) => handleChange('arrivalBelt', e.target.value)}
-                        className="w-full rounded-3xl border border-slate-800 bg-slate-900 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-500"
-                        placeholder="Ej. 1"
-                      />
-                    </label>
                   </div>
                 </div>
 
@@ -285,31 +253,6 @@ export default function Page() {
                   <option value="WS 2908" />
                   <option value="WS 2506" />
                   <option value="WS 2740" />
-                </datalist>
-
-                <datalist id="arrivalGateOptions">
-                  <option value="A2" />
-                  <option value="A3" />
-                  <option value="A4" />
-                  <option value="A5" />
-                  <option value="A6" />
-                  <option value="A7" />
-                  <option value="A8" />
-                  <option value="A9" />
-                </datalist>
-
-                <datalist id="arrivalBeltOptions">
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </datalist>
-
-                <datalist id="arrivalCountersOptions">
-                  <option value="1-6" />
-                  <option value="7-14" />
-                  <option value="15-20" />
-                  <option value="21-28" />
-                  <option value="29-34" />
                 </datalist>
 
                 <div className="rounded-2xl border border-slate-800 bg-slate-900 p-4">
