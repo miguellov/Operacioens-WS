@@ -1,3 +1,4 @@
+import { buildWhatsappMessage } from '@/lib/whatsappTemplate';
 import { FlightOperation } from '@/types/flightOperation';
 import { Clock, Accessibility, Users, Package, Baby, User, PawPrint, Briefcase } from 'lucide-react';
 
@@ -58,15 +59,25 @@ export const OperationPreview = ({ operation, onPrint, onDownloadImage, exportin
         )}
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-4">
         <div className="rounded-3xl bg-slate-900 p-4 text-slate-300">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">ALGR</p>
-          <p className="mt-2 text-lg font-semibold text-white">{operation.algr}</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Llegada ALGR</p>
+          <p className="mt-2 text-lg font-semibold text-white">{operation.arrivalAlgr}</p>
         </div>
         <div className="rounded-3xl bg-slate-900 p-4 text-slate-300">
-          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">BLND</p>
-          <p className="mt-2 text-lg font-semibold text-white">{operation.blnd}</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Llegada BLND</p>
+          <p className="mt-2 text-lg font-semibold text-white">{operation.arrivalBlnd}</p>
         </div>
+        <div className="rounded-3xl bg-slate-900 p-4 text-slate-300">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Salida ALGR</p>
+          <p className="mt-2 text-lg font-semibold text-white">{operation.departureAlgr}</p>
+        </div>
+        <div className="rounded-3xl bg-slate-900 p-4 text-slate-300">
+          <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Salida BLND</p>
+          <p className="mt-2 text-lg font-semibold text-white">{operation.departureBlnd}</p>
+        </div>
+      </div>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div className="rounded-3xl bg-slate-900 p-4 text-slate-300">
           <p className="text-xs uppercase tracking-[0.3em] text-slate-500">CREW</p>
           <p className="mt-2 text-lg font-semibold text-white">{operation.crew}</p>
@@ -100,32 +111,7 @@ export const OperationPreview = ({ operation, onPrint, onDownloadImage, exportin
 
     <div className="mt-6 rounded-3xl border border-slate-800 bg-slate-900 p-5 text-sm text-slate-400">
       <p className="font-semibold text-white">Mensaje WhatsApp</p>
-      <p className="mt-2 whitespace-pre-line text-slate-300">{`✈️ Vuelo ${operation.flightNumber}
-
-👥 Pax: ${operation.pax}
-🎒 Bags: ${operation.bags}
-♿ WCHR: ${operation.wheelchair}
-👶 INF: ${operation.infants}
-🧒 CHD: ${operation.children}
-🐕 AVIH: ${operation.avih}
-🐾 PETC: ${operation.petc}
-⏰ ETA: ${operation.eta}
-
-
-✈️ Vuelo ${operation.departureFlightNumber || operation.flightNumber}
-
-👥 Pax: ${operation.departurePax}
-🎒 Bags: ${operation.departureBags}
-♿ WCHR: ${operation.departureWheelchair}
-👶 INF: ${operation.departureInfants}
-🧒 CHD: ${operation.departureChildren}
-🐕 AVIH: ${operation.departureAvih}
-🐾 PETC: ${operation.departurePetc}
-🧳❌NCOB: ${operation.departureNcob}
-
-⏳ ETD: ${operation.etd}
-
-NOGO: ${operation.departureNogoCount}`}</p>
+      <p className="mt-2 whitespace-pre-line text-slate-300">{buildWhatsappMessage(operation)}</p>
     </div>
 
     <div className="mt-6 text-right text-xs uppercase tracking-[0.3em] text-slate-500">Imprima esta hoja tipo carta para el reporte operativo.</div>

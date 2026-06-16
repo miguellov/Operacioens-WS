@@ -14,9 +14,51 @@ const emojis = {
 };
 
 export const buildWhatsappMessage = (operation: FlightOperation) => {
-  const arrivalBlock = `${emojis.plane} Vuelo ${operation.flightNumber}\n\n${emojis.pax} Pax: ${operation.pax}\n${emojis.bags} Bags: ${operation.bags}\n${emojis.wchr} WCHR: ${operation.wheelchair}\n${emojis.inf} INF: ${operation.infants}\n${emojis.chd} CHD: ${operation.children}\n${emojis.avih} AVIH: ${operation.avih}\n${emojis.petc} PETC: ${operation.petc}\nALGR: ${operation.algr}\nBLND: ${operation.blnd}\n${emojis.eta} ETA: ${operation.eta}${operation.nogoCount > 0 ? `\n\nNOGO: ${operation.nogoCount}` : ''}`;
+  const arrivalBlock = `${emojis.plane} Vuelo ${operation.flightNumber}
 
-  const departureBlock = `${emojis.plane} Vuelo ${operation.departureFlightNumber || operation.flightNumber}\n\n${emojis.pax} Pax: ${operation.departurePax}\n${emojis.wchr} WCHR: ${operation.departureWheelchair}\n${emojis.inf} INF: ${operation.departureInfants}\n${emojis.chd} CHD: ${operation.departureChildren}\n${emojis.avih} AVIH: ${operation.departureAvih}\n${emojis.petc} PETC: ${operation.departurePetc}\n🧳❌ NCOB: ${operation.departureNcob}\n\nALGR: ${operation.algr}\nBLND: ${operation.blnd}\nCREW: ${operation.crew}\n\n${emojis.etd} ETD: ${operation.etd}\n\nNOGO: ${operation.departureNogoCount}${operation.departureNogoNames || operation.departureNogoPnrs ? `\n\nNOGO Nombres: ${operation.departureNogoNames || 'Sin nombres'}\nPNR: ${operation.departureNogoPnrs || 'Sin PNR'}` : ''}`;
+${emojis.pax} Pax: ${operation.pax}
+${emojis.bags} Bags: ${operation.bags}
+${emojis.wchr} WCHR: ${operation.wheelchair}
+${emojis.inf} INF: ${operation.infants}
+${emojis.chd} CHD: ${operation.children}
+${emojis.avih} AVIH: ${operation.avih}
+${emojis.petc} PETC: ${operation.petc}
+Gate: ${operation.arrivalGate || 'TBD'}
+Counters: ${operation.arrivalCounters || 'TBD'}
+Belt: ${operation.arrivalBelt || 'TBD'}
+ALGR: ${operation.arrivalAlgr}
+BLND: ${operation.arrivalBlnd}
+${emojis.eta} ETA: ${operation.eta}${operation.nogoCount > 0 ? `
+
+NOGO: ${operation.nogoCount}` : ''}${operation.nogoNames || operation.nogoPnrs ? `
+
+NOGO Nombres: ${operation.nogoNames || 'Sin nombres'}
+PNR: ${operation.nogoPnrs || 'Sin PNR'}` : ''}`;
+
+  const departureBlock = `${emojis.plane} Vuelo ${operation.departureFlightNumber || operation.flightNumber}
+
+${emojis.pax} Pax: ${operation.departurePax}
+${emojis.bags} Bags: ${operation.departureBags}
+${emojis.wchr} WCHR: ${operation.departureWheelchair}
+${emojis.inf} INF: ${operation.departureInfants}
+${emojis.chd} CHD: ${operation.departureChildren}
+${emojis.avih} AVIH: ${operation.departureAvih}
+${emojis.petc} PETC: ${operation.departurePetc}
+Gate: ${operation.gate || 'TBD'}
+Counters: ${operation.counters || 'TBD'}
+Belt: ${operation.belt || 'TBD'}
+🧳❌ NCOB: ${operation.departureNcob}
+
+ALGR: ${operation.departureAlgr}
+BLND: ${operation.departureBlnd}
+CREW: ${operation.crew}
+
+${emojis.etd} ETD: ${operation.etd}
+
+NOGO: ${operation.departureNogoCount}${operation.departureNogoNames || operation.departureNogoPnrs ? `
+
+NOGO Nombres: ${operation.departureNogoNames || 'Sin nombres'}
+PNR: ${operation.departureNogoPnrs || 'Sin PNR'}` : ''}`;
 
   return `${arrivalBlock}\n\n---\n\n${departureBlock}`;
 };

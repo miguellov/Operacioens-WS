@@ -28,8 +28,10 @@ export interface FlightOperation {
   etd: string;
   ncob: number;
   departureNcob: number;
-  algr: number;
-  blnd: number;
+  arrivalAlgr: number;
+  arrivalBlnd: number;
+  departureAlgr: number;
+  departureBlnd: number;
   crew: number;
   nogo: boolean;
   nogoCount: number;

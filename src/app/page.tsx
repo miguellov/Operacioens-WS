@@ -39,8 +39,10 @@ const defaultOperation: FlightOperation = {
   etd: '',
   ncob: 0,
   departureNcob: 0,
-  algr: 0,
-  blnd: 0,
+  arrivalAlgr: 0,
+  arrivalBlnd: 0,
+  departureAlgr: 0,
+  departureBlnd: 0,
   crew: 0,
   nogo: false,
   nogoCount: 0,
@@ -79,8 +81,12 @@ export default function Page() {
   const normalizedPhone = normalizePhone(phone.trim());
 
   const isValid = useMemo(() => {
-    return operation.flightNumber.trim().length > 0 && phoneNumberPattern.test(normalizedPhone);
-  }, [operation.flightNumber, normalizedPhone]);
+    return (
+      operation.flightNumber.trim().length > 0 &&
+      operation.departureFlightNumber.trim().length > 0 &&
+      phoneNumberPattern.test(normalizedPhone)
+    );
+  }, [operation.flightNumber, operation.departureFlightNumber, normalizedPhone]);
 
   const handleChange = (field: keyof FlightOperation, value: string | boolean) => {
     const textFields: Array<keyof FlightOperation> = [
@@ -224,8 +230,8 @@ export default function Page() {
                       { field: 'children', label: '🧒 CHD' },
                       { field: 'avih', label: '🐕 AVIH' },
                       { field: 'petc', label: '🐾 PETC' },
-                      { field: 'algr', label: 'ALGR' },
-                      { field: 'blnd', label: 'BLND' },
+                      { field: 'arrivalAlgr', label: 'ALGR' },
+                      { field: 'arrivalBlnd', label: 'BLND' },
                       { field: 'eta', label: '⏰ ETA', isText: true },
                     ].map((item) => (
                       <label key={item.field} className="space-y-2 text-sm text-slate-300">
@@ -320,8 +326,8 @@ export default function Page() {
                       { field: 'departurePetc', label: '🐾 PETC' },
                       { field: 'etd', label: '⏳ ETD', isText: true },
                       { field: 'departureNcob', label: '🧳❌ NCOB' },
-                      { field: 'algr', label: 'ALGR' },
-                      { field: 'blnd', label: 'BLND' },
+                      { field: 'departureAlgr', label: 'ALGR' },
+                      { field: 'departureBlnd', label: 'BLND' },
                       { field: 'crew', label: 'CREW' },
                       { field: 'nogoCount', label: 'NOGO' },
                     ].map((item) => (
