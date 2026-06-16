@@ -1,6 +1,14 @@
 import { buildWhatsappMessage } from '@/lib/whatsappTemplate';
 import { FlightOperation } from '@/types/flightOperation';
-import { Clock, Accessibility, Users, Package, Baby, User, PawPrint, Briefcase } from 'lucide-react';
+
+const previewEmojis = {
+  algr: '🤧',
+  blnd: '🧑‍🦯',
+  eta: '⏰',
+  etd: '⏳',
+  ncob: '🧳❌',
+  crew: '🧑‍✈️',
+};
 
 interface OperationPreviewProps {
   operation: FlightOperation;
@@ -85,28 +93,50 @@ export const OperationPreview = ({ operation, onPrint, onDownloadImage, exportin
       </div>
     </div>
 
-    <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {[
-        { label: '🛫 Gate', value: operation.gate, icon: Users },
-        { label: '🎫 Counters', value: operation.counters, icon: Package },
-        { label: '🧾 Belt', value: operation.belt, icon: Package },
-        { label: '♿ WCHR', value: operation.wheelchair.toString(), icon: Accessibility },
-        { label: '👶 INF', value: operation.infants.toString(), icon: Baby },
-        { label: '🧒 CHD', value: operation.children.toString(), icon: User },
-        { label: '🐕 AVIH', value: operation.avih.toString(), icon: PawPrint },
-        { label: '🐾 PETC', value: operation.petc.toString(), icon: Briefcase },
-      ].map((item) => {
-        const Icon = item.icon;
-        return (
-          <div key={item.label} className="rounded-3xl bg-slate-900 p-4">
-            <div className="flex items-center gap-2 text-slate-300">
-              <Icon className="h-4 w-4 text-cyan-300" />
-              <span className="text-xs uppercase tracking-[0.3em] text-slate-500">{item.label}</span>
-            </div>
-            <p className="mt-3 text-2xl font-semibold text-white">{item.value}</p>
+    <div className="mt-6 rounded-3xl border border-slate-800 bg-slate-900 p-5 text-slate-300">
+      <div className="grid gap-4 lg:grid-cols-2">
+        <div className="rounded-3xl bg-slate-950 p-4">
+          <div className="text-xs uppercase tracking-[0.3em] text-cyan-300">Llegada</div>
+          <div className="mt-4 space-y-2 text-sm text-white">
+            <div className="flex justify-between"><span>✈️ Vuelo</span><span>{operation.flightNumber || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>Gate</span><span>{operation.arrivalGate || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>Counters</span><span>{operation.arrivalCounters || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>Belt</span><span>{operation.arrivalBelt || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>PX</span><span>{operation.pax}</span></div>
+            <div className="flex justify-between"><span>BAG</span><span>{operation.bags}</span></div>
+            <div className="flex justify-between"><span>WCHR</span><span>{operation.wheelchair}</span></div>
+            <div className="flex justify-between"><span>INF</span><span>{operation.infants}</span></div>
+            <div className="flex justify-between"><span>CHD</span><span>{operation.children}</span></div>
+            <div className="flex justify-between"><span>AVIH</span><span>{operation.avih}</span></div>
+            <div className="flex justify-between"><span>PETC</span><span>{operation.petc}</span></div>
+            <div className="flex justify-between"><span>{previewEmojis.algr} ALGR</span><span>{operation.arrivalAlgr}</span></div>
+            <div className="flex justify-between"><span>{previewEmojis.blnd} BLND</span><span>{operation.arrivalBlnd}</span></div>
+            <div className="flex justify-between text-cyan-300"><span>{previewEmojis.eta} ETA</span><span>{operation.eta || '--:--'}</span></div>
           </div>
-        );
-      })}
+        </div>
+        <div className="rounded-3xl bg-slate-950 p-4">
+          <div className="text-xs uppercase tracking-[0.3em] text-cyan-300">Salida</div>
+          <div className="mt-4 space-y-2 text-sm text-white">
+            <div className="flex justify-between"><span>✈️ Vuelo</span><span>{operation.departureFlightNumber || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>Gate</span><span>{operation.gate || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>Counters</span><span>{operation.counters || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>Belt</span><span>{operation.belt || 'TBD'}</span></div>
+            <div className="flex justify-between"><span>PAX</span><span>{operation.departurePax}</span></div>
+            <div className="flex justify-between"><span>BAGS</span><span>{operation.departureBags}</span></div>
+            <div className="flex justify-between"><span>WCHR</span><span>{operation.departureWheelchair}</span></div>
+            <div className="flex justify-between"><span>INF</span><span>{operation.departureInfants}</span></div>
+            <div className="flex justify-between"><span>CHD</span><span>{operation.departureChildren}</span></div>
+            <div className="flex justify-between"><span>AVIH</span><span>{operation.departureAvih}</span></div>
+            <div className="flex justify-between"><span>PETC</span><span>{operation.departurePetc}</span></div>
+            <div className="flex justify-between"><span>{previewEmojis.ncob} NCOB</span><span>{operation.departureNcob}</span></div>
+            <div className="flex justify-between"><span>{previewEmojis.algr} ALGR</span><span>{operation.departureAlgr}</span></div>
+            <div className="flex justify-between"><span>{previewEmojis.blnd} BLND</span><span>{operation.departureBlnd}</span></div>
+            <div className="flex justify-between"><span>{previewEmojis.crew} CREW</span><span>{operation.crew}</span></div>
+            <div className="flex justify-between text-cyan-300"><span>{previewEmojis.etd} ETD</span><span>{operation.etd || '--:--'}</span></div>
+            <div className="flex justify-between text-white"><span>NOGO</span><span>{operation.departureNogoCount}</span></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div className="mt-6 rounded-3xl border border-slate-800 bg-slate-900 p-5 text-sm text-slate-400">

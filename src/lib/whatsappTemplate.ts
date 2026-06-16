@@ -11,6 +11,13 @@ const emojis = {
   petc: '\uD83D\uDC3E',
   eta: '\u23F0',
   etd: '\u23F3',
+  gate: '\uD83D\uDEEB',
+  counters: '\uD83D\uDCCB',
+  belt: '\uD83D\uDCE6',
+  ncob: '\uD83E\uDDF3\u274C',
+  algr: '🤧',
+  blnd: '🧑‍🦯',
+  crew: '\uD83D\uDC68\u200D\u2708\uFE0F',
 };
 
 export const buildWhatsappMessage = (operation: FlightOperation) => {
@@ -26,9 +33,9 @@ ${emojis.petc} PETC: ${operation.petc}
 Gate: ${operation.arrivalGate || 'TBD'}
 Counters: ${operation.arrivalCounters || 'TBD'}
 Belt: ${operation.arrivalBelt || 'TBD'}
-ALGR: ${operation.arrivalAlgr}
-BLND: ${operation.arrivalBlnd}
-${emojis.eta} ETA: ${operation.eta}${operation.nogoCount > 0 ? `
+${emojis.algr} ALGR: ${operation.arrivalAlgr}
+${emojis.blnd} BLND: ${operation.arrivalBlnd}
+${emojis.eta} ETA: ${operation.eta || 'TBD'}${operation.nogoCount > 0 ? `
 
 NOGO: ${operation.nogoCount}` : ''}${operation.nogoNames || operation.nogoPnrs ? `
 
@@ -47,13 +54,13 @@ ${emojis.petc} PETC: ${operation.departurePetc}
 Gate: ${operation.gate || 'TBD'}
 Counters: ${operation.counters || 'TBD'}
 Belt: ${operation.belt || 'TBD'}
-🧳❌ NCOB: ${operation.departureNcob}
+${emojis.ncob} NCOB: ${operation.departureNcob}
 
-ALGR: ${operation.departureAlgr}
-BLND: ${operation.departureBlnd}
-CREW: ${operation.crew}
+${emojis.algr} ALGR: ${operation.departureAlgr}
+${emojis.blnd} BLND: ${operation.departureBlnd}
+${emojis.crew} CREW: ${operation.crew}
 
-${emojis.etd} ETD: ${operation.etd}
+${emojis.etd} ETD: ${operation.etd || 'TBD'}
 
 NOGO: ${operation.departureNogoCount}${operation.departureNogoNames || operation.departureNogoPnrs ? `
 
