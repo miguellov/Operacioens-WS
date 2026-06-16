@@ -1,26 +1,127 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --background: #020617;
+  --foreground: #f8fafc;
+  --surface: #0c1320;
+  --surface-2: #121d34;
+  --accent: #22d3ee;
+  --accent-2: #38bdf8;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #020617;
+    --foreground: #f8fafc;
   }
 }
 
+html {
+  min-height: 100%;
+}
+
 body {
+  min-height: 100%;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(34, 211, 238, 0.18);
+  color: #ffffff;
+}
+
+@page {
+  size: letter portrait;
+  margin: 20mm;
+}
+
+.print-card {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+@media print {
+  :root {
+    color-scheme: light;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+
+  body {
+    min-height: auto;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-card {
+    border-radius: 0 !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    color: #111827 !important;
+  }
+
+  .print-card * {
+    color: #111827 !important;
+    background-color: transparent !important;
+  }
+
+  .print-card .rounded-3xl {
+    border-radius: 0 !important;
+    background-color: #ffffff !important;
+    border-color: #d1d5db !important;
+  }
+
+  .print-card .bg-slate-900,
+  .print-card .bg-slate-950,
+  .print-card .bg-slate-800,
+  .print-card .bg-white,
+  .print-card .bg-cyan-500\/15,
+  .print-card .bg-rose-500\/15 {
+    background-color: #ffffff !important;
+  }
+
+  .print-card .shadow-2xl,
+  .print-card .shadow-xl,
+  .print-card .shadow-cyan-500\/10 {
+    box-shadow: none !important;
+  }
+
+  .print-card .border {
+    border-color: #d1d5db !important;
+  }
+
+  .print-card .text-slate-400,
+  .print-card .text-slate-300,
+  .print-card .text-cyan-400,
+  .print-card .text-cyan-300,
+  .print-card .text-rose-400,
+  .print-card .text-rose-300,
+  .print-card .text-slate-500,
+  .print-card .text-slate-600 {
+    color: #4b5563 !important;
+  }
 }
